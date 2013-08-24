@@ -1,6 +1,6 @@
 {
   "name": "csv-load-sync",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Sync loading of a small .csv file",
   "main": "index.js",
   "scripts": {
@@ -16,5 +16,8 @@
   "license": "MIT",
   "devDependencies": {
     "gt": "~0.8.8"
+  },
+  "dependencies": {
+    "check-types": "~0.6.4"
   }
 }
