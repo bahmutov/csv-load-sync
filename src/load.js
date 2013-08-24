@@ -12,17 +12,27 @@ function load(filename) {
 
   var results = [];
   var columns = getColumns(lines[0]);
+  check.verifyArray(columns, 'could not get columns from first line ' +
+    lines[0]);
   lines.forEach(function (line, index) {
     if (index === 0) {
       return; // we already have columns
     }
+    if (!line) {
+      return;
+    }
 
-    var tester = {};
+    var obj = {};
     var values = getColumns(line);
+    check.verifyArray(values, 'could not get values from line ' + line);
+    console.assert(values.length === columns.length,
+      'expected values from line ' + line + ' to match property names ' +
+      ' from first line ' + lines[0]);
+
     values.forEach(function (value, columnIndex) {
-      tester[columns[columnIndex]] = value;
+      obj[columns[columnIndex]] = value;
     });
-    results.push(tester);
+    results.push(obj);
   });
 
   return results;

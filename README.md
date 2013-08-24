@@ -20,6 +20,8 @@ Example CSV file with three records
 
 ## Usage
 
-    var loader = require('csv-load-sync');
-    var csv = loader('path/to/file.csv');
-    // csv is an Array of objects
+```javascript
+var loader = require('csv-load-sync');
+var csv = loader('path/to/file.csv');
+// csv is an Array of objects
+```
