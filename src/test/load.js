@@ -31,3 +31,12 @@ gt.test('property values', function () {
   gt.equal(results[1].deviceId, '2');
   gt.equal(results[1].description, 'iPhone 4S');
 });
+
+gt.test('loading 100 records', function () {
+  var filename = path.join(__dirname, '100.csv');
+  gt.faster('loading 100 records should take less 100 ms',
+    function () {
+      var results = load(filename);
+      gt.equal(results.length, 100, 'loaded 100 records');
+    }, 100);
+});
