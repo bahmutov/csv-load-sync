@@ -13,5 +13,8 @@
     "sync"
   ],
   "author": "Gleb Bahmutov <gleb.bahmutov@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "gt": "~0.8.8"
+  }
 }
