@@ -3,6 +3,10 @@
 Sync loading routine for a small comma-separated values file (.csv). Returns an array of objects, takes property names from
 the first line. Assumes everything is a string in quotes.
 
+[![Build Status](https://travis-ci.org/bahmutov/csv-load-sync.png)](https://travis-ci.org/bahmutov/csv-load-sync)
+
+[![Package info](https://nodei.co/npm/csv-load-sync.png?downloads=true)](https://nodei.co/npm/csv-load-sync.png?downloads=true)
+
 Requires nodejs, install using `npm install csv-load-sync`
 
 Example CSV file with two records
