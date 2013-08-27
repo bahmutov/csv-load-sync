@@ -4,7 +4,7 @@
   "description": "Sync loading of a small .csv file",
   "main": "index.js",
   "scripts": {
-    "test": "gt src/**/test/*.js"
+    "test": "node ./node_modules/gt src/**/test/*.js"
   },
   "repository": "",
   "keywords": [
