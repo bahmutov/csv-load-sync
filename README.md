@@ -3,9 +3,11 @@
 Sync loading routine for a small comma-separated values file (.csv). Returns an array of objects, takes property names from
 the first line. Assumes everything is a string in quotes.
 
-[![Build Status](https://travis-ci.org/bahmutov/csv-load-sync.png)](https://travis-ci.org/bahmutov/csv-load-sync)
+[![Package info][nodei.co]](https://npmjs.org/package/csv-load-sync)
 
-[![Package info](https://nodei.co/npm/csv-load-sync.png?downloads=true)](https://nodei.co/npm/csv-load-sync.png?downloads=true)
+[![Build status][ci-image]][ci-status]
+[![dependencies][dependencies-image]][dependencies-url]
+[![endorse][endorse-image]][endorse-url]
 
 Requires nodejs, install using `npm install csv-load-sync`
 
@@ -29,3 +31,17 @@ var loader = require('csv-load-sync');
 var csv = loader('path/to/file.csv');
 // csv is an Array of objects
 ```
+
+### Fine print
+
+Author: Gleb Bahmutov <gleb.bahmutov@gmail.com>
+License: MIT
+Copyright &copy; 2013 Gleb Bahmutov
+
+[ci-image]: https://secure.travis-ci.org/bahmutov/csv-load-sync.png?branch=master
+[ci-status]: http://travis-ci.org/#!/bahmutov/csv-load-sync
+[nodei.co]: https://nodei.co/npm/csv-load-sync.png?downloads=true
+[dependencies-image]: https://david-dm.org/bahmutov/csv-load-sync.png
+[dependencies-url]: https://david-dm.org/bahmutov/csv-load-sync
+[endorse-image]: https://api.coderwall.com/bahmutov/endorsecount.png
+[endorse-url]: https://coderwall.com/bahmutov
