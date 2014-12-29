@@ -15,9 +15,9 @@
   "author": "Gleb Bahmutov <gleb.bahmutov@gmail.com>",
   "license": "MIT",
   "devDependencies": {
-    "gt": "~0.8.21"
+    "gt": "0.8.47"
   },
   "dependencies": {
-    "check-types": "~1.1.1"
+    "check-types": "1.4.0"
   }
 }
