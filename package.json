@@ -4,7 +4,7 @@
   "main": "index.js",
   "version": "0.0.0-semantic-release",
   "scripts": {
-    "test": "node ./node_modules/gt src/**/test/*.js",
+    "test": "gt src/**/test/*.js",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "repository": {
@@ -19,8 +19,8 @@
   "author": "Gleb Bahmutov <gleb.bahmutov@gmail.com>",
   "license": "MIT",
   "devDependencies": {
-    "gt": "0.8.47",
-    "semantic-release": "^4.3.5"
+    "gt": "0.9.1",
+    "semantic-release": "6.2.0"
   },
   "dependencies": {
     "check-types": "1.4.0"
