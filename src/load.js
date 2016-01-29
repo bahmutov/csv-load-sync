@@ -2,7 +2,7 @@ var check = require('check-types');
 var fs = require('fs');
 var eol = '\n';
 
-function load(filename) {
+function load(filename, options) {
   check.verify.string(filename, 'missing filename');
   var content = fs.readFileSync(filename, 'utf-8');
   check.verify.string(content, 'missing content from ' + filename);
@@ -10,8 +10,12 @@ function load(filename) {
   console.assert(lines.length > 1, 'invalid number of lines ' +
     lines.length + ' in file ' + filename);
 
+  var splitToColumns = options && check.fn(options.getColumns)
+    ? options.getColumns : getColumns;
+
   var results = [];
-  var columns = getColumns(lines[0]);
+  var columns = stripQuotes(splitToColumns(lines[0], 0));
+
   check.verify.array(columns, 'could not get columns from first line ' +
     lines[0]);
   lines.forEach(function (line, index) {
@@ -23,7 +27,8 @@ function load(filename) {
     }
 
     var obj = {};
-    var values = getColumns(line);
+    var values = stripQuotes(splitToColumns(line, index));
+
     check.verify.array(values, 'could not get values from line ' + line);
     console.assert(values.length === columns.length,
       'expected values from line ' + line + ' to match property names ' +
@@ -43,7 +48,6 @@ function getColumns(line) {
   var columns = line.split(',');
   console.assert(columns.length > 1, 'invalid columns ' +
     JSON.stringify(columns) + ' from line ' + line);
-  columns = stripQuotes(columns);
   return columns;
 }
 

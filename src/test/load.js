@@ -4,7 +4,29 @@ var load = require('../load');
 gt.module('load');
 
 gt.test('basics', function () {
-  gt.arity(load, 1, 'single argument');
+  gt.arity(load, 2, 'two arguments');
+});
+
+gt.test('custom parsing', function () {
+  function split(line, lineNumber) {
+    if (lineNumber === 0) {
+      // title line
+      return line.split(',')
+    }
+    // our line will be <location>,<lat>,<lon>
+    // and we want to combine lat and lon
+    var parts = line.split(',')
+    return [parts[0], parts[1] + ',' + parts[2]];
+  }
+
+  var filename = path.join(__dirname, 'gps.csv');
+  var results = load(filename, {
+    getColumns: split
+  });
+
+  gt.array(results, 'returns results');
+  gt.equal(results.length, 2, 'two records');
+  gt.equal(results[0].place, 'home');
 });
 
 gt.test('two records', function () {

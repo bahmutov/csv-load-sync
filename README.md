@@ -30,12 +30,48 @@ Example CSV file with three records
     "2","Greg","Smith","US","2013-07-12 13:27:18"
     "3","Harold","Smith","GB","2013-07-16 21:17:28"
 
-## Example
+## Simple example
 
 ```js
 var loader = require('csv-load-sync');
 var csv = loader('path/to/file.csv');
 // csv is an Array of objects
+```
+
+## Custom line splitting
+
+Sometimes CSV data includes commas naturally, for example the follwing file
+has GPS location numbers which should be considered together.
+
+    "place","location"
+    "home",-41.20,20.11
+    "work",-41.3,20.2
+
+We need to split each record line differently. You can pass the line to columns splitter
+function when calling `load`
+
+```js
+function split(line, lineNumber) {
+  if (lineNumber === 0) { // title line
+    return line.split(',')
+  }
+  // our line will be <location>,<lat>,<lon>
+  // and we want to combine lat and lon
+  var parts = line.split(',')
+  return [parts[0], parts[1] + ',' + parts[2]];
+}
+var results = load(filename, {
+  getColumns: split
+});
+/*
+[{
+  place: 'home',
+  location: '-41.20,20.11'
+}, {
+  place: 'work',
+  location: '-41.3,20.2'
+}]
+*/
 ```
 
 ### Fine print
