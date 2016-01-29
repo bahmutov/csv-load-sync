@@ -7,9 +7,15 @@ the first line. Assumes everything is a string in quotes.
 
 [![Build status][ci-image]][ci-status]
 [![dependencies][dependencies-image]][dependencies-url]
-[![endorse][endorse-image]][endorse-url]
+[![semantic-release][semantic-image] ][semantic-url]
 
-Requires nodejs, install using `npm install csv-load-sync`
+## Install
+
+Requires nodejs
+
+    npm install csv-load-sync
+
+## Inputs
 
 Example CSV file with two records
 
@@ -24,9 +30,9 @@ Example CSV file with three records
     "2","Greg","Smith","US","2013-07-12 13:27:18"
     "3","Harold","Smith","GB","2013-07-16 21:17:28"
 
-## Usage
+## Example
 
-```javascript
+```js
 var loader = require('csv-load-sync');
 var csv = loader('path/to/file.csv');
 // csv is an Array of objects
@@ -34,14 +40,20 @@ var csv = loader('path/to/file.csv');
 
 ### Fine print
 
-Author: Gleb Bahmutov <gleb.bahmutov@gmail.com>
-License: MIT
-Copyright &copy; 2013 Gleb Bahmutov
+Author: Gleb Bahmutov &copy; 2015
+
+* [@bahmutov](https://twitter.com/bahmutov)
+* [glebbahmutov.com](http://glebbahmutov.com)
+* [blog](http://glebbahmutov.com/blog/)
+
+License: MIT - do anything with the code, but don't blame me if it does not work.
+
+Spread the word: tweet, star on github, etc.
 
 [ci-image]: https://secure.travis-ci.org/bahmutov/csv-load-sync.png?branch=master
 [ci-status]: http://travis-ci.org/#!/bahmutov/csv-load-sync
 [nodei.co]: https://nodei.co/npm/csv-load-sync.png?downloads=true
 [dependencies-image]: https://david-dm.org/bahmutov/csv-load-sync.png
 [dependencies-url]: https://david-dm.org/bahmutov/csv-load-sync
-[endorse-image]: https://api.coderwall.com/bahmutov/endorsecount.png
-[endorse-url]: https://coderwall.com/bahmutov
+[semantic-image]: https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg
+[semantic-url]: https://github.com/semantic-release/semantic-release
