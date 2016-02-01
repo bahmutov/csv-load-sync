@@ -29,6 +29,13 @@ gt.test('custom parsing', function () {
   gt.equal(results[0].place, 'home');
 });
 
+gt.test('one column of three records', function () {
+  var filename = path.join(__dirname, 'one.csv');
+  var results = load(filename);
+  gt.array(results, 'returns results');
+  gt.equal(results.length, 3, 'three objects');
+});
+
 gt.test('two records', function () {
   var filename = path.join(__dirname, 'two.csv');
   var results = load(filename);
