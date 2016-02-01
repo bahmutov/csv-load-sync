@@ -46,7 +46,7 @@ function load(filename, options) {
 function getColumns(line) {
   check.verify.string(line, 'missing header line');
   var columns = line.split(',');
-  console.assert(columns.length > 1, 'invalid columns ' +
+  console.assert(columns.length >= 1, 'invalid columns ' +
     JSON.stringify(columns) + ' from line ' + line);
   return columns;
 }
