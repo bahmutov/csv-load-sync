@@ -20,7 +20,8 @@
   ],
   "files": [
     "index.js",
-    "src/load.js"
+    "src/load.js",
+    "README.md"
   ],
   "author": "Gleb Bahmutov <gleb.bahmutov@gmail.com>",
   "license": "MIT",
