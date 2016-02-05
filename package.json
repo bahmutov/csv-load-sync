@@ -12,6 +12,7 @@
     "type": "git",
     "url": "https://github.com/bahmutov/csv-load-sync.git"
   },
+  "readmeFilename": "README.md",
   "keywords": [
     "csv",
     "load",
