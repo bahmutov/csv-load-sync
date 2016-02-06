@@ -6,7 +6,8 @@
   "scripts": {
     "test": "gt src/**/test/*.js",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post",
-    "size": "t=\"$(npm pack .)\"; wc -c \"${t}\"; tar tvf \"${t}\"; rm \"${t}\";"
+    "size": "t=\"$(npm pack .)\"; wc -c \"${t}\"; tar tvf \"${t}\"; rm \"${t}\";",
+    "commit": "commit-wizard"
   },
   "repository": {
     "type": "git",
@@ -26,9 +27,19 @@
   "license": "MIT",
   "devDependencies": {
     "gt": "0.9.1",
+    "pre-git": "^3.3.0",
     "semantic-release": "6.2.0"
   },
   "dependencies": {
     "check-more-types": "^2.10.0"
+  },
+  "config": {
+    "pre-git": {
+      "commit-msg": ["simple"],
+      "pre-commit": ["npm test"],
+      "pre-push": ["npm run size"],
+      "post-commit": [],
+      "post-merge": []
+    }
   }
 }
