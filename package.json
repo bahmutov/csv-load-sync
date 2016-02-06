@@ -29,6 +29,6 @@
     "semantic-release": "6.2.0"
   },
   "dependencies": {
-    "check-types": "1.4.0"
+    "check-more-types": "^2.10.0"
   }
 }
