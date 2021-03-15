@@ -1,1 +1,2 @@
-module.exports = require('./src/load');
+const load = require('./src/load')
+module.exports = { load }

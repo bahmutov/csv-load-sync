@@ -32,8 +32,8 @@ Example CSV file with three records
 ## Simple example
 
 ```js
-var loader = require('csv-load-sync');
-var csv = loader('path/to/file.csv');
+const {load} = require('csv-load-sync');
+const csv = load('path/to/file.csv');
 // csv is an Array of objects
 ```
 
@@ -42,7 +42,7 @@ var csv = loader('path/to/file.csv');
 You can convert every value from string to a desired type for the specified columns. For example to convert device IDs to an integer, while make the descriptions all uppercase:
 
 ```js
-const load = require('csv-load-sync')
+const {load} = require('csv-load-sync')
 const csv = load('./phone.csv', {
   convert: {
     deviceId: parseInt,
