@@ -6,7 +6,6 @@ the first line. Assumes everything is a string in quotes.
 [![Package info][nodei.co]](https://npmjs.org/package/csv-load-sync)
 
 [![Build status][ci-image]][ci-status]
-[![dependencies][dependencies-image]][dependencies-url]
 [![semantic-release][semantic-image] ][semantic-url]
 
 ## Install
@@ -87,8 +86,6 @@ License: MIT - do anything with the code, but don't blame me if it does not work
 Spread the word: tweet, star on github, etc.
 
 [nodei.co]: https://nodei.co/npm/csv-load-sync.png?downloads=true
-[dependencies-image]: https://david-dm.org/bahmutov/csv-load-sync.png
-[dependencies-url]: https://david-dm.org/bahmutov/csv-load-sync
 [semantic-image]: https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg
 [semantic-url]: https://github.com/semantic-release/semantic-release
 [ci image]: https://github.com/bahmutov/csv-load-sync/workflows/ci/badge.svg?branch=master
