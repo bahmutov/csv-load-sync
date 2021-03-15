@@ -5,7 +5,7 @@ the first line. Assumes everything is a string in quotes.
 
 [![Package info][nodei.co]](https://npmjs.org/package/csv-load-sync)
 
-[![Build status][ci-image]][ci-status]
+[![ci status][ci image]][ci url]
 [![semantic-release][semantic-image] ][semantic-url]
 
 ## Install
