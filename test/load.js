@@ -1,5 +1,5 @@
 const path = require('path')
-const load = require('../load')
+const load = require('../src/load')
 const expect = require('chai').expect
 
 describe('load', () => {
