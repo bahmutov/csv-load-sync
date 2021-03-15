@@ -104,6 +104,16 @@ const results = load(filename, {
 })
 ```
 
+## Get columns
+
+You can just get the header names from the CSV file
+
+```js
+const {getHeaders} = require('csv-load-sync')
+const names = getHeaders('path/to/file.csv')
+// names is an array of strings
+```
+
 ### Fine print
 
 Author: Gleb Bahmutov &copy; 2015

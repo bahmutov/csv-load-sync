@@ -2,7 +2,24 @@ var check = require('check-more-types')
 var fs = require('fs')
 var eol = '\n'
 
-function load(filename, options) {
+const isContentLine = (line) => {
+  line = line.trim()
+  if (!line) {
+    // skip blank lines
+    return false
+  }
+  if (line[0] === '#') {
+    // skip comments
+    return false
+  }
+  return true
+}
+
+const skipComments = (lines) => {
+  return lines.filter(isContentLine)
+}
+
+const readFile = (filename) => {
   check.verify.string(filename, 'missing filename')
   var content = fs.readFileSync(filename, 'utf-8')
   check.verify.string(content, 'missing content from ' + filename)
@@ -11,6 +28,34 @@ function load(filename, options) {
     lines.length > 1,
     'invalid number of lines ' + lines.length + ' in file ' + filename,
   )
+  const filteredLines = skipComments(lines)
+  console.assert(
+    lines.length > 1,
+    'invalid number of filtered lines ' +
+      filteredLines.length +
+      ' in file ' +
+      filename,
+  )
+  return filteredLines
+}
+
+const getHeadersFromLines = (filteredLines, splitToColumns) => {
+  const columns = stripQuotes(splitToColumns(filteredLines[0], 0))
+  return columns
+}
+
+const getHeaders = (filename, options) => {
+  options = options || {}
+  const splitToColumns = check.fn(options.getColumns)
+    ? options.getColumns
+    : getColumns
+
+  const filteredLines = readFile(filename)
+  return getHeadersFromLines(filteredLines, splitToColumns)
+}
+
+function load(filename, options) {
+  const filteredLines = readFile(filename)
 
   options = options || {}
   const convert = options.convert || {}
@@ -24,21 +69,9 @@ function load(filename, options) {
     skipColumns[s] = true
   })
 
-  var splitToColumns =
-    options && check.fn(options.getColumns) ? options.getColumns : getColumns
-
-  const filteredLines = lines.filter((line) => {
-    line = line.trim()
-    if (!line) {
-      // skip blank lines
-      return false
-    }
-    if (line[0] === '#') {
-      // skip comments
-      return false
-    }
-    return true
-  })
+  const splitToColumns = check.fn(options.getColumns)
+    ? options.getColumns
+    : getColumns
 
   console.assert(
     filteredLines.length > 1,
@@ -49,11 +82,11 @@ function load(filename, options) {
   )
 
   const results = []
-  const columns = stripQuotes(splitToColumns(filteredLines[0], 0))
+  const columns = getHeadersFromLines(filteredLines, splitToColumns)
 
   check.verify.array(
     columns,
-    'could not get columns from first line ' + lines[0],
+    'could not get columns from first line ' + filteredLines[0],
   )
 
   filteredLines.forEach(function (line, index) {
@@ -71,7 +104,7 @@ function load(filename, options) {
         line +
         ' to match property names ' +
         ' from first line ' +
-        lines[0],
+        filteredLines[0],
     )
 
     values.forEach(function (value, columnIndex) {
@@ -110,4 +143,4 @@ function stripQuotes(words) {
   })
 }
 
-module.exports = load
+module.exports = { load, getHeaders }

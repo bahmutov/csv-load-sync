@@ -1,6 +1,14 @@
 const path = require('path')
-const load = require('../src/load')
+const { load, getHeaders } = require('../src/load')
 const expect = require('chai').expect
+
+describe('getHeaders', () => {
+  it('gets the headers', () => {
+    const filename = path.join(__dirname, 'gaps-comments.csv')
+    const results = getHeaders(filename)
+    expect(results).to.deep.equal(['deviceId', 'description'])
+  })
+})
 
 describe('load', () => {
   it('basics', function () {

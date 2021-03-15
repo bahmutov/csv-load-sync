@@ -1,2 +1,2 @@
-const load = require('./src/load')
-module.exports = { load }
+const { load, getHeaders } = require('./src/load')
+module.exports = { load, getHeaders }
