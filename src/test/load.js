@@ -1,71 +1,77 @@
-// var path = require('path');
-// var load = require('../load');
+const path = require('path')
+const load = require('../load')
+const expect = require('chai').expect
 
-// gt.module('load');
+describe('load', () => {
+  it('basics', function () {
+    expect(load).to.be.a('function')
+    expect(load, 'two arguments').to.have.property('length', 2)
+  })
 
-// gt.test('basics', function () {
-//   gt.arity(load, 2, 'two arguments');
-// });
+  it('custom parsing', function () {
+    function split(line, lineNumber) {
+      if (lineNumber === 0) {
+        // title line
+        return line.split(',')
+      }
+      // our line will be <location>,<lat>,<lon>
+      // and we want to combine lat and lon
+      var parts = line.split(',')
+      return [parts[0], parts[1] + ',' + parts[2]]
+    }
+    var filename = path.join(__dirname, 'gps.csv')
+    var results = load(filename, {
+      getColumns: split,
+    })
+    expect(results, 'returns results').to.be.an('array')
+    expect(results, 'two records').to.have.length(2)
+    expect(results[0]).to.have.property('place', 'home')
+  })
 
-// gt.test('custom parsing', function () {
-//   function split(line, lineNumber) {
-//     if (lineNumber === 0) {
-//       // title line
-//       return line.split(',')
-//     }
-//     // our line will be <location>,<lat>,<lon>
-//     // and we want to combine lat and lon
-//     var parts = line.split(',')
-//     return [parts[0], parts[1] + ',' + parts[2]];
-//   }
+  it('one column of three records', function () {
+    var filename = path.join(__dirname, 'one.csv')
+    var results = load(filename)
+    expect(results, 'returns results').to.be.an('array')
+    expect(results, 'two records').to.have.length(3)
+  })
 
-//   var filename = path.join(__dirname, 'gps.csv');
-//   var results = load(filename, {
-//     getColumns: split
-//   });
+  it('two records', function () {
+    var filename = path.join(__dirname, 'two.csv')
+    var results = load(filename)
+    expect(results, 'returns results').to.be.an('array')
+    expect(results, 'two records').to.have.length(2)
+  })
 
-//   gt.array(results, 'returns results');
-//   gt.equal(results.length, 2, 'two records');
-//   gt.equal(results[0].place, 'home');
-// });
+  it('three records', function () {
+    var filename = path.join(__dirname, 'three.csv')
+    var results = load(filename)
+    expect(results, 'returns results').to.be.an('array')
+    expect(results, 'two records').to.have.length(3)
+  })
 
-// gt.test('one column of three records', function () {
-//   var filename = path.join(__dirname, 'one.csv');
-//   var results = load(filename);
-//   gt.array(results, 'returns results');
-//   gt.equal(results.length, 3, 'three objects');
-// });
+  it('property values', function () {
+    var filename = path.join(__dirname, 'two.csv')
+    var results = load(filename)
+    expect(results, 'two records').to.have.length(2)
+    expect(results[0]).to.deep.equal({
+      deviceId: '1',
+      description: 'iPhone 4',
+    })
+    expect(results[1]).to.deep.equal({
+      deviceId: '2',
+      description: 'iPhone 4S',
+    })
+  })
 
-// gt.test('two records', function () {
-//   var filename = path.join(__dirname, 'two.csv');
-//   var results = load(filename);
-//   gt.array(results, 'returns results');
-//   gt.equal(results.length, 2, 'two objects');
-// });
-
-// gt.test('three records', function () {
-//   var filename = path.join(__dirname, 'three.csv');
-//   var results = load(filename);
-//   gt.array(results, 'returns results');
-//   gt.equal(results.length, 3, 'three objects');
-// });
-
-// gt.test('property values', function () {
-//   var filename = path.join(__dirname, 'two.csv');
-//   var results = load(filename);
-
-//   gt.equal(results[0].deviceId, '1');
-//   gt.equal(results[0].description, 'iPhone 4');
-
-//   gt.equal(results[1].deviceId, '2');
-//   gt.equal(results[1].description, 'iPhone 4S');
-// });
-
-// gt.test('loading 100 records', function () {
-//   var filename = path.join(__dirname, '100.csv');
-//   gt.faster('loading 100 records should take less 100 ms',
-//     function () {
-//       var results = load(filename);
-//       gt.equal(results.length, 100, 'loaded 100 records');
-//     }, 100);
-// });
+  it('loading 100 records', function () {
+    var filename = path.join(__dirname, '100.csv')
+    const started = +new Date()
+    var results = load(filename)
+    expect(results, 'loaded 100 records').to.have.length(100)
+    const finished = +new Date()
+    const took = finished - started
+    expect(took, 'loading 100 records should take less 100 ms').to.be.lessThan(
+      100,
+    )
+  })
+})
