@@ -27,25 +27,38 @@ function load(filename, options) {
   var splitToColumns =
     options && check.fn(options.getColumns) ? options.getColumns : getColumns
 
-  var results = []
-  var columns = stripQuotes(splitToColumns(lines[0], 0))
+  const filteredLines = lines.filter((line) => {
+    line = line.trim()
+    if (!line) {
+      // skip blank lines
+      return false
+    }
+    if (line[0] === '#') {
+      // skip comments
+      return false
+    }
+    return true
+  })
+
+  console.assert(
+    filteredLines.length > 1,
+    'invalid number of filtered lines ' +
+      filteredLines.length +
+      ' in file ' +
+      filename,
+  )
+
+  const results = []
+  const columns = stripQuotes(splitToColumns(filteredLines[0], 0))
 
   check.verify.array(
     columns,
     'could not get columns from first line ' + lines[0],
   )
-  lines.forEach(function (line, index) {
+
+  filteredLines.forEach(function (line, index) {
     if (index === 0) {
       return // we already have columns
-    }
-    line = line.trim()
-    if (!line) {
-      // skip blank lines
-      return
-    }
-    if (line[0] === '#') {
-      // skip comments
-      return
     }
 
     var obj = {}

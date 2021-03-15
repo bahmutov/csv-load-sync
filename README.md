@@ -92,7 +92,7 @@ var results = load(filename, {
 
 ## Comments
 
-Blank lines and lines starting with `#` are skipped, but make sure the first line is always the headers line.
+Blank lines and lines starting with `#` are skipped.
 
 ## Skip columns
 
