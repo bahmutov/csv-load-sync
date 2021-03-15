@@ -1,5 +1,5 @@
 const path = require('path')
-const { load, getHeaders } = require('../src/load')
+const { load, getHeaders, parseCSV } = require('../src/load')
 const expect = require('chai').expect
 
 describe('getHeaders', () => {
@@ -7,6 +7,32 @@ describe('getHeaders', () => {
     const filename = path.join(__dirname, 'gaps-comments.csv')
     const results = getHeaders(filename)
     expect(results).to.deep.equal(['deviceId', 'description'])
+  })
+})
+
+describe('parseCSV', () => {
+  it('parses given text', () => {
+    const text = `
+      "deviceId","description","serial"
+      "1","iPhone 4","123"
+      "2","iPhone 4S","abc"
+    `
+    const csv = parseCSV(text, {
+      convert: {
+        deviceId: parseInt,
+      },
+      skip: 'serial',
+    })
+    expect(csv).to.deep.equal([
+      {
+        deviceId: 1,
+        description: 'iPhone 4',
+      },
+      {
+        deviceId: 2,
+        description: 'iPhone 4S',
+      },
+    ])
   })
 })
 

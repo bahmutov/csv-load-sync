@@ -19,24 +19,23 @@ const skipComments = (lines) => {
   return lines.filter(isContentLine)
 }
 
-const readFile = (filename) => {
-  check.verify.string(filename, 'missing filename')
-  var content = fs.readFileSync(filename, 'utf-8')
-  check.verify.string(content, 'missing content from ' + filename)
-  var lines = content.split(eol)
-  console.assert(
-    lines.length > 1,
-    'invalid number of lines ' + lines.length + ' in file ' + filename,
-  )
+const getLinesFromText = (text) => {
+  var lines = text.split(eol)
+  console.assert(lines.length > 1, 'invalid number of lines ' + lines.length)
   const filteredLines = skipComments(lines)
   console.assert(
     lines.length > 1,
-    'invalid number of filtered lines ' +
-      filteredLines.length +
-      ' in file ' +
-      filename,
+    'invalid number of filtered lines ' + filteredLines.length,
   )
   return filteredLines
+}
+
+const readFile = (filename) => {
+  check.verify.string(filename, 'missing filename')
+  const content = fs.readFileSync(filename, 'utf-8')
+  check.verify.string(content, 'missing content from ' + filename)
+
+  return getLinesFromText(content)
 }
 
 const getHeadersFromLines = (filteredLines, splitToColumns) => {
@@ -54,9 +53,7 @@ const getHeaders = (filename, options) => {
   return getHeadersFromLines(filteredLines, splitToColumns)
 }
 
-function load(filename, options) {
-  const filteredLines = readFile(filename)
-
+function parseLines(filteredLines, options) {
   options = options || {}
   const convert = options.convert || {}
   let skip = options.skip || []
@@ -75,10 +72,7 @@ function load(filename, options) {
 
   console.assert(
     filteredLines.length > 1,
-    'invalid number of filtered lines ' +
-      filteredLines.length +
-      ' in file ' +
-      filename,
+    'invalid number of filtered lines ' + filteredLines.length,
   )
 
   const results = []
@@ -124,6 +118,16 @@ function load(filename, options) {
   return results
 }
 
+function parseCSV(text, options) {
+  const filteredLines = getLinesFromText(text)
+  return parseLines(filteredLines, options)
+}
+
+function load(filename, options) {
+  const filteredLines = readFile(filename)
+  return parseLines(filteredLines, options)
+}
+
 function getColumns(line) {
   check.verify.string(line, 'missing header line')
   var columns = line.split(',')
@@ -143,4 +147,4 @@ function stripQuotes(words) {
   })
 }
 
-module.exports = { load, getHeaders }
+module.exports = { load, getHeaders, parseCSV }

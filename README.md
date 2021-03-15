@@ -110,6 +110,16 @@ const results = load(filename, {
 })
 ```
 
+## Parse given text
+
+If you load the CSV text yourself, you can use `` to parse it
+
+```js
+const {parseCSV} = require('csv-load-sync')
+// csv is your text to be parsed
+const records = parseCSV(csv)
+```
+
 ## Get columns
 
 You can just get the header names from the CSV file

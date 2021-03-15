@@ -1,2 +1,2 @@
-const { load, getHeaders } = require('./src/load')
-module.exports = { load, getHeaders }
+const { load, getHeaders, parseCSV } = require('./src/load')
+module.exports = { load, getHeaders, parseCSV }
