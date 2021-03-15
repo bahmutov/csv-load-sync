@@ -99,4 +99,31 @@ describe('load', () => {
     const results = load(filename)
     expect(results, 'two records').to.have.length(2)
   })
+
+  it('skips specified column', () => {
+    const filename = path.join(__dirname, 'three.csv')
+    const results = load(filename, {
+      skip: 'lastLogin',
+    })
+    expect(results, 'number of records').to.have.length(3)
+    expect(results[0], 'first record').to.deep.equal({
+      id: '1',
+      firstName: 'John',
+      lastName: 'Smith',
+      country: 'US',
+    })
+  })
+
+  it('skips specified columns', () => {
+    const filename = path.join(__dirname, 'three.csv')
+    const results = load(filename, {
+      skip: ['lastLogin', 'country'],
+    })
+    expect(results, 'number of records').to.have.length(3)
+    expect(results[0], 'first record').to.deep.equal({
+      id: '1',
+      firstName: 'John',
+      lastName: 'Smith',
+    })
+  })
 })

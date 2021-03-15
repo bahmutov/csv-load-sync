@@ -14,6 +14,15 @@ function load(filename, options) {
 
   options = options || {}
   const convert = options.convert || {}
+  let skip = options.skip || []
+  if (typeof skip === 'string') {
+    skip = [skip]
+  }
+  check.verify.strings(skip, 'expected list of columns to skip')
+  const skipColumns = {}
+  skip.forEach((s) => {
+    skipColumns[s] = true
+  })
 
   var splitToColumns =
     options && check.fn(options.getColumns) ? options.getColumns : getColumns
@@ -54,6 +63,9 @@ function load(filename, options) {
 
     values.forEach(function (value, columnIndex) {
       const key = columns[columnIndex]
+      if (skipColumns[key]) {
+        return
+      }
       if (check.fn(convert[key])) {
         obj[key] = convert[key](value)
       } else {

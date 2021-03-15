@@ -94,6 +94,16 @@ var results = load(filename, {
 
 Blank lines and lines starting with `#` are skipped, but make sure the first line is always the headers line.
 
+## Skip columns
+
+Sometimes you want to skip certain columns. Use an option:
+
+```js
+const results = load(filename, {
+  skip: ['lastLogin', 'country'],
+})
+```
+
 ### Fine print
 
 Author: Gleb Bahmutov &copy; 2015
