@@ -102,6 +102,28 @@ describe('load', () => {
     })
   })
 
+  it('converts booleans', () => {
+    var filename = path.join(__dirname, 'fields.csv')
+    var results = load(filename, {
+      convert: {
+        deviceId: parseInt,
+        description: (s) => s.toUpperCase(),
+        'premium model': (s) => (s === 'true' ? true : false),
+      },
+    })
+    expect(results, 'two records').to.have.length(2)
+    expect(results[0]).to.deep.equal({
+      deviceId: 1,
+      description: 'IPHONE 4',
+      'premium model': false,
+    })
+    expect(results[1]).to.deep.equal({
+      deviceId: 2,
+      description: 'IPHONE 4S',
+      'premium model': true,
+    })
+  })
+
   it('skips comments and blank lines', () => {
     const filename = path.join(__dirname, 'gaps-comments.csv')
     const results = load(filename)

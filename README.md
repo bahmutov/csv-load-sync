@@ -54,6 +54,12 @@ const csv = load('./phone.csv', {
 // deviceId: 2, description: "IPHONE 4S"
 ```
 
+Useful conversions:
+
+- to boolean: `(s) => (s === 'true' ? true : false)`
+- to integer: `parseInt`
+- to floats: `parseFloat`
+
 ## Custom line splitting
 
 Sometimes CSV data includes commas naturally, for example the follwing file
