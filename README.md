@@ -37,6 +37,23 @@ var csv = loader('path/to/file.csv');
 // csv is an Array of objects
 ```
 
+## Convert values
+
+You can convert every value from string to a desired type for the specified columns. For example to convert device IDs to an integer, while make the descriptions all uppercase:
+
+```js
+const load = require('csv-load-sync')
+const csv = load('./phone.csv', {
+  convert: {
+    deviceId: parseInt,
+    description: (s) => s.toUpperCase(),
+  },
+})
+// objects:
+// deviceId: 1, description: "IPHONE 4"
+// deviceId: 2, description: "IPHONE 4S"
+```
+
 ## Custom line splitting
 
 Sometimes CSV data includes commas naturally, for example the follwing file
@@ -80,6 +97,7 @@ Author: Gleb Bahmutov &copy; 2015
 * [@bahmutov](https://twitter.com/bahmutov)
 * [glebbahmutov.com](https://glebbahmutov.com)
 * [blog](https://glebbahmutov.com/blog/)
+* [video channel](https://www.youtube.com/glebbahmutov)
 
 License: MIT - do anything with the code, but don't blame me if it does not work.
 

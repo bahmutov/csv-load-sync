@@ -74,4 +74,23 @@ describe('load', () => {
       100,
     )
   })
+
+  it('converts numbers', () => {
+    var filename = path.join(__dirname, 'two.csv')
+    var results = load(filename, {
+      convert: {
+        deviceId: parseInt,
+        description: (s) => s.toUpperCase(),
+      },
+    })
+    expect(results, 'two records').to.have.length(2)
+    expect(results[0]).to.deep.equal({
+      deviceId: 1,
+      description: 'IPHONE 4',
+    })
+    expect(results[1]).to.deep.equal({
+      deviceId: 2,
+      description: 'IPHONE 4S',
+    })
+  })
 })
