@@ -13,22 +13,6 @@ jobs:
       - name: Run tests 🧪
         run: npm test
 
-      - name: Run examples 📊
-        env:
-          DEBUG: quick
-        run: |
-          npm run example
-          node bin/npm-quick-run.js test-foo 'foo bar'
-          node bin/npm-quick-run.js echo
-          # use prefix search by word
-          node bin/npm-quick-run.js t-f 'foo bar'
-          node bin/npm-quick-run.js t:f 'foo bar'
-          # with stopper . at the end
-          # https://github.com/bahmutov/npm-quick-run/issues/35
-          node bin/npm-quick-run.js t-f. 'foo bar'
-          # should find single "size" script
-          node bin/npm-quick-run.js s.
-
       - name: Semantic Release 🚀
         uses: cycjimmy/semantic-release-action@v2
         env:
