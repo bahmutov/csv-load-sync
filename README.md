@@ -90,6 +90,10 @@ var results = load(filename, {
 */
 ```
 
+## Comments
+
+Blank lines and lines starting with `#` are skipped, but make sure the first line is always the headers line.
+
 ### Fine print
 
 Author: Gleb Bahmutov &copy; 2015

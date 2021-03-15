@@ -29,7 +29,13 @@ function load(filename, options) {
     if (index === 0) {
       return // we already have columns
     }
+    line = line.trim()
     if (!line) {
+      // skip blank lines
+      return
+    }
+    if (line[0] === '#') {
+      // skip comments
       return
     }
 
