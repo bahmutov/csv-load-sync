@@ -1,11 +1,11 @@
 {
   "name": "csv-load-sync",
   "description": "Sync loading of a small .csv file",
-  "version": "0.0.0-semantic-release",
+  "version": "0.0.0-development",
   "main": "index.js",
   "scripts": {
     "test": "mocha src/**/test/*.js",
-    "semantic-release": "semantic-release pre && npm publish && semantic-release post",
+    "semantic-release": "semantic-release",
     "size": "npm pack --dry"
   },
   "repository": {
@@ -27,7 +27,7 @@
   "devDependencies": {
     "chai": "4.3.4",
     "mocha": "8.3.2",
-    "semantic-release": "6.2.0"
+    "semantic-release": "^17.4.2"
   },
   "dependencies": {
     "check-more-types": "^2.10.0"

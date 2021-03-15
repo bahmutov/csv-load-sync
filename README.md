@@ -13,7 +13,7 @@ the first line. Assumes everything is a string in quotes.
 
 Requires nodejs
 
-    npm install csv-load-sync
+    npm install -S csv-load-sync
 
 ## Inputs
 
@@ -79,17 +79,17 @@ var results = load(filename, {
 Author: Gleb Bahmutov &copy; 2015
 
 * [@bahmutov](https://twitter.com/bahmutov)
-* [glebbahmutov.com](http://glebbahmutov.com)
-* [blog](http://glebbahmutov.com/blog/)
+* [glebbahmutov.com](https://glebbahmutov.com)
+* [blog](https://glebbahmutov.com/blog/)
 
 License: MIT - do anything with the code, but don't blame me if it does not work.
 
 Spread the word: tweet, star on github, etc.
 
-[ci-image]: https://secure.travis-ci.org/bahmutov/csv-load-sync.png?branch=master
-[ci-status]: http://travis-ci.org/#!/bahmutov/csv-load-sync
 [nodei.co]: https://nodei.co/npm/csv-load-sync.png?downloads=true
 [dependencies-image]: https://david-dm.org/bahmutov/csv-load-sync.png
 [dependencies-url]: https://david-dm.org/bahmutov/csv-load-sync
 [semantic-image]: https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg
 [semantic-url]: https://github.com/semantic-release/semantic-release
+[ci image]: https://github.com/bahmutov/csv-load-sync/workflows/ci/badge.svg?branch=master
+[ci url]: https://github.com/bahmutov/csv-load-sync/actions
