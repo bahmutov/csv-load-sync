@@ -94,7 +94,7 @@ describe('load', () => {
     })
   })
 
-  it.only('skips comments and blank lines', () => {
+  it('skips comments and blank lines', () => {
     const filename = path.join(__dirname, 'gaps-comments.csv')
     const results = load(filename)
     expect(results, 'two records').to.have.length(2)
