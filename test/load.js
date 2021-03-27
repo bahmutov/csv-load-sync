@@ -182,4 +182,27 @@ describe('load', () => {
       lastName: 'Smith',
     })
   })
+
+  it('parse quoted values with commas properly', () => {
+    const filename = path.join(__dirname, 'fields-with-commas.csv')
+    const results = load(filename)
+    expect(results, 'number of records').to.have.length(1)
+    expect(results[0], 'first record').to.deep.equal({
+      id: '1',
+      description: 'iPhone 4',
+      price: '800,20',
+    })
+  })
+
+  it('parse empty colums', () => {
+    const filename = path.join(__dirname, 'empty-columns.csv')
+    const results = load(filename)
+    expect(results, 'number of records').to.have.length(1)
+    expect(results[0], 'first record').to.deep.equal({
+      id: '1',
+      description: 'iPhone 4',
+      notes: '',
+      price: '800,20',
+    })
+  })
 })
