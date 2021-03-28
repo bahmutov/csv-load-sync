@@ -1,5 +1,6 @@
 var check = require('check-more-types')
 var fs = require('fs')
+const { join } = require('path')
 var eol = '\n'
 
 const isContentLine = (line) => {
@@ -130,7 +131,27 @@ function load(filename, options) {
 
 function getColumns(line) {
   check.verify.string(line, 'missing header line')
-  var columns = line.split(',')
+
+  const regex = /(?!\s*$)\s*(?:'([^'\\]*(?:\\[\S\s][^'\\]*)*)'|"([^"\\]*(?:\\[\S\s][^"\\]*)*)"|([^,'"\s\\]*(?:\s+[^,'"\s\\]+)*))\s*(?:,|$)/g
+
+  const columns = []
+  do {
+    m = regex.exec(line)
+    if (m) {
+      if (typeof m[2] === 'undefined') {
+        // check if match group 3 is set (e.g. for booleans)
+        if (typeof m[3] !== 'undefined') {
+          columns.push(m[3])
+        } else {
+          // add empty value since column seems to be empty
+          columns.push('')
+        }
+      } else {
+        columns.push(m[2])
+      }
+    }
+  } while (m)
+
   console.assert(
     columns.length >= 1,
     'invalid columns ' + JSON.stringify(columns) + ' from line ' + line,
